@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>冬训 Day 15 · 11月8日周日 · 重点大课</title>
+
+<style>
+  :root{
+    --ink:#101828; --ink-2:#344054; --muted:#667085;
+    --bg:#f4f6fb; --card:#ffffff;
+    --track:#e8462b; --track-d:#c2321b;
+    --navy:#14233f; --navy-2:#1d3561;
+    --ice:#eef4ff;
+    --ok:#039855; --ok-bg:#e7f6ee;
+    --warn:#b54708; --warn-bg:#fef4e6;
+    --bad:#b42318; --bad-bg:#fdeceb;
+    --line:#e4e9f2; --line-2:#eef1f6;
+    --radius:18px;
+    --shadow:0 1px 2px rgba(16,24,40,.05),0 12px 32px -16px rgba(20,35,63,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.75;font-size:16px;-webkit-text-size-adjust:100%}
+  a{color:var(--track-d)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 18px 72px}
+  .hero{background:linear-gradient(155deg,var(--navy) 0%,var(--navy-2) 56%,#2a4a86 100%);color:#fff;
+    padding:34px 0 64px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-2px;height:46px;
+    background:repeating-linear-gradient(90deg,var(--track) 0 70px,#fff 70px 78px);
+    opacity:.9;clip-path:polygon(0 30%,100% 0,100% 100%,0 100%)}
+  .hero-inner{max-width:920px;margin:0 auto;padding:0 18px;position:relative;z-index:2}
+  .dayrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .day-badge{background:var(--track);color:#fff;font-weight:800;font-size:13px;letter-spacing:.08em;
+    padding:7px 14px;border-radius:999px}
+  .day-date{color:#c9d8f5;font-size:14px;font-weight:600}
+  h1{font-size:30px;line-height:1.25;margin:14px 0 8px;letter-spacing:.01em}
+  .hero p.lead{margin:0;color:#dbe6fa;font-size:15.5px;max-width:640px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+    padding:5px 12px;border-radius:999px;font-size:12.5px;color:#eef4ff}
+  .goalcard{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:20px 22px;margin-top:-38px;position:relative;z-index:3;border:1px solid var(--line)}
+  .goalcard h2{margin:0 0 6px;font-size:17px;color:var(--navy)}
+  .goalcard p{margin:0;color:var(--ink-2);font-size:14.5px}
+  .goaltags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .gtag{font-size:12.5px;font-weight:700;padding:5px 11px;border-radius:8px}
+  .gtag.a{background:var(--ice);color:var(--navy-2)}
+  .gtag.b{background:#fff0ec;color:var(--track-d)}
+  .gtag.c{background:var(--ok-bg);color:var(--ok)}
+  .prep{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 6px}
+  .prep .it{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px}
+  .prep .k{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:3px}
+  .prep .v{font-size:14px;color:var(--ink);font-weight:600;line-height:1.5}
+  section{margin-top:34px}
+  .sec-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-num{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+  .sec-h h2{margin:0;font-size:20px;color:var(--navy)}
+  .sec-sub{color:var(--muted);font-size:13.5px;margin:-8px 0 14px 46px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;box-shadow:var(--shadow);margin-bottom:14px}
+  .timeline{position:relative;margin-left:6px}
+  .phase{position:relative;padding:0 0 18px 30px;border-left:2px solid var(--line)}
+  .phase:last-child{border-left-color:transparent;padding-bottom:0}
+  .phase::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:3px solid var(--navy)}
+  .phase.key::before{border-color:var(--track)}
+  .ptime{font-size:12.5px;font-weight:800;color:var(--track-d);letter-spacing:.03em}
+  .ptitle{font-size:16px;font-weight:800;color:var(--navy);margin:1px 0 2px}
+  .pmeta{font-size:13px;color:var(--muted)}
+  .move{border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:14px;background:#fff}
+  .move h4{margin:0 0 4px;font-size:16px;color:var(--ink);display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .tag-s{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;background:var(--ice);color:var(--navy-2)}
+  .tag-h{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;background:#fff0ec;color:var(--track-d)}
+  .move .why{font-size:13.5px;color:var(--track-d);background:#fff6f4;border-radius:8px;padding:7px 11px;margin:9px 0}
+  .move ol{margin:8px 0 4px;padding-left:21px}
+  .move ol li{margin:4px 0;font-size:14.5px}
+  .dose{font-size:13.5px;background:var(--ice);border-radius:8px;padding:8px 12px;margin-top:9px;color:var(--navy-2);font-weight:600}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .box{border-radius:10px;padding:11px 13px;font-size:13.5px;line-height:1.65}
+  .box.good{background:var(--ok-bg);border:1px solid #bfe7d2}
+  .box.bad{background:var(--bad-bg);border:1px solid #f4c7c3}
+  .box b{display:block;margin-bottom:3px;font-size:13px}
+  .box.good b{color:var(--ok)} .box.bad b{color:var(--bad)}
+  .box ul{margin:0;padding-left:17px}
+  .video-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:6px}
+  .video{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+  .v-head{padding:13px 16px 11px}
+  .v-title{font-weight:800;font-size:15px;color:var(--navy);margin-bottom:2px}
+  .v-src{font-size:12px;color:var(--muted)}
+  .v-focus{font-size:13px;color:var(--ink-2);background:var(--ice);margin:0 16px 12px;border-radius:9px;padding:9px 12px}
+  .v-focus b{color:var(--navy-2)}
+  .v-frame{display:block;margin:0 16px 14px;aspect-ratio:16/9;border-radius:10px;overflow:hidden;
+    position:relative;background:#0c1424;cursor:pointer;text-decoration:none}
+  .v-frame .play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff}
+  .v-frame .play .tri{width:0;height:0;border-left:22px solid #fff;border-top:14px solid transparent;border-bottom:14px solid transparent;margin-left:6px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+  .v-frame .play .pl-txt{font-size:13px;background:rgba(0,0,0,.45);padding:4px 12px;border-radius:999px}
+  .v-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vfoot{padding:0 16px 14px;font-size:12.5px}
+  .vfoot a{font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+  th{background:var(--ice);color:var(--navy);font-size:13px;font-weight:800}
+  td .hint{color:var(--muted);font-size:12.5px}
+  .rec{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .note{border-radius:12px;padding:13px 16px;font-size:14px;margin:12px 0}
+  .note.warn{background:var(--warn-bg);border:1px solid #f6d8a8;color:#7a3c05}
+  .note.red{background:var(--bad-bg);border:1px solid #f4c7c3;color:#7a271a}
+  .note.info{background:var(--ice);border:1px solid #cfe0fb;color:var(--navy-2)}
+  .note b{display:block;margin-bottom:2px}
+  .check{display:flex;gap:11px;align-items:flex-start;padding:11px 4px;border-bottom:1px solid var(--line-2);cursor:pointer}
+  .check:last-child{border-bottom:0}
+  .check input{width:20px;height:20px;margin-top:3px;accent-color:var(--track);flex:0 0 auto}
+  .check .ct{font-size:14.5px;color:var(--ink)}
+  .check input:checked + .ct{color:var(--muted);text-decoration:line-through}
+  .progress-wrap{position:sticky;bottom:12px;z-index:5;background:var(--navy);color:#fff;border-radius:999px;
+    padding:10px 18px;margin-top:18px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);font-size:13.5px}
+  .bar{flex:1;height:8px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--track);border-radius:99px;transition:width .3s}
+  footer{margin-top:40px;color:var(--muted);font-size:12.5px;text-align:center;line-height:1.8}
+  @media (max-width:680px){
+    h1{font-size:24px}
+    .prep{grid-template-columns:repeat(2,1fr)}
+    .two{grid-template-columns:1fr}
+    .card{padding:17px 16px}
+    th:nth-child(3),td:nth-child(3){display:none}
+  }
+  @media print{
+    .hero{padding-bottom:30px} .hero::after{display:none}
+    .goalcard{margin-top:14px;box-shadow:none}
+    .v-frame,.progress-wrap{display:none}
+    body{background:#fff;font-size:12.5px}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="dayrow">
+      <span class="day-badge">冬训 DAY 15 · W3</span>
+      <span class="day-date">2026年11月8日 · 周日 · 约110分钟</span>
+    </div>
+    <h1>重点大课</h1>
+    <p class="lead">本周最高质量课！神经反应→超速步频→爆发力→基础力量，全部高质量完成。</p>
+    <div class="chips">
+      <span class="chip">主题：步频 + 神经反应</span>
+      <span class="chip">强度：高</span>
+      <span class="chip">神经唤醒期</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+
+    <div class="goalcard">
+      <h2>🔥 重点大课：本周最高质量课</h2>
+      <p>冬训第3周 · 神经唤醒期。今天是本周最重要的训练日：<b>神经反应→超速步频→爆发力→基础力量</b>，全部高质量完成。学动作、低量、建立动作模式。</p>
+      <div class="goaltags">
+        <span class="gtag a">神经反应</span>
+        <span class="gtag b">超速步频</span>
+        <span class="gtag c">爆发力+力量</span>
+        <span class="gtag a">约110分钟</span>
+      </div>
+    </div>
+
+    <div class="prep">
+      <div class="it"><div class="k">时长</div><div class="v">约110分钟</div></div>
+      <div class="it"><div class="k">强度</div><div class="v">高（短组高质量）</div></div>
+      <div class="it"><div class="k">场地</div><div class="v">田径场</div></div>
+      <div class="it"><div class="k">装备</div><div class="v">训练鞋、绳梯、标志碟、计时秒表</div></div>
+    </div>
+    
+    <section>
+      <div class="sec-h"><span class="sec-num">⏱</span><h2>今天的时间轴</h2></div>
+      <div class="card">
+        <div class="timeline">
+          <div class="phase"><div class="ptime">0:00 – 0:25</div><div class="ptitle">充分热身</div><div class="pmeta">比周六更充分，加小碎步/快速摆臂</div></div>
+          <div class="phase key"><div class="ptime">0:25 – 0:37</div><div class="ptitle">神经反应（最前面！）</div><div class="pmeta">多姿势反应起跑+手势变向，总量≤15次</div></div>
+          <div class="phase key"><div class="ptime">0:37 – 0:55</div><div class="ptitle">超速步频</div><div class="pmeta">节拍器高频跑+飞跑</div></div>
+          <div class="phase key"><div class="ptime">0:55 – 1:15</div><div class="ptitle">爆发力</div><div class="pmeta">立定跳远+三级跳+跨步跳</div></div>
+          <div class="phase key"><div class="ptime">1:15 – 1:40</div><div class="ptitle">基础力量（徒手学动作）</div><div class="pmeta">深蹲+RDL+分腿蹲+提踵</div></div>
+          <div class="phase"><div class="ptime">1:40 – 结束</div><div class="ptitle">放松拉伸</div><div class="pmeta">全套静态拉伸+泡沫轴</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-h"><span class="sec-num">1</span><h2>热身（25分钟）</h2></div>
+      <div class="card">
+    <div class="move">
+      <h4>标准热身流程 <span class="tag-s">20-25分钟</span></h4>
+      <ol>
+        <li><b>慢跑800-1000米：</b>身体微出汗即可，不是速度跑。冬天冷可多跑200米。</li>
+        <li><b>动态活动：</b>高抬腿走、后踢腿走各20米；弓步走、侧弓步、弓步转体各15米；直腿行进、交叉步各20米；踝膝髋绕环各10次。</li>
+        <li><b>跑专门性练习各2×20米：</b>A式高抬腿走→B式扒地走→折叠跑→直腿跑。</li>
+        <li><b>神经激活：</b>小碎步5秒×3、快速摆臂10秒×2、Pogo轻跳10秒×2。</li>
+        <li><b>渐进加速跑2×30米：</b>第一趟70%，第二趟90%。</li>
+      </ol>
+      <div class="two">
+        <div class="box good"><b>✅ 要点</b><ul><li>高重心、身体挺拔</li><li>前脚掌、有弹性、声音轻</li><li>动作幅度由小到大</li></ul></div>
+        <div class="box bad"><b>❌ 常见错误</b><ul><li>冷状态暴力拉伸</li><li>全脚掌重砸地面</li><li>弯腰驼背做练习</li></ul></div>
+      </div>
+      <div class="dose">冬天热身必须做满25分钟，身体真正热透、手脚不僵才能进入主课。</div>
+    </div></div>
+    </section>
+
+    <section>
+      <div class="sec-h"><span class="sec-num">2</span><h2>神经反应（12分钟，趁最清醒练）</h2></div>
+      <div class="card">
+        <div class="move">
+          <h4>听信号多姿势反应起跑 <span class="tag-h">练反应时+第一步爆发</span></h4>
+          <ol>
+            <li><b>听掌站立起跑：</b>站立预备，家长随机间隔（2-8秒）拍掌，全力冲10-15米。</li>
+            <li><b>多姿势反应：</b>从半蹲、坐姿、俯卧听信号迅速起身冲刺15米。</li>
+            <li><b>手势变向冲刺：</b>家长抬手→向前冲、手按下→停、手左指→向左5米，共3次。</li>
+          </ol>
+          <div class="dose">📋 听掌起跑5次 + 多姿势3次（每个姿势1次）+ 手势变向3次。<b>每次间完全休息1.5-2分钟</b>，总量≤15次。</div>
+        </div>
+        <div class="note red"><b>反应训练铁律</b>放在体力最好时、每组只做几次、完全休息、信号随机——违反任何一条都白练。</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-h"><span class="sec-num">3</span><h2>超速步频（18分钟）</h2></div>
+      <div class="card">
+        <div class="move"><h4>节拍器行进间高频跑 <span class="tag-s">4×20米</span></h4><div class="why">W1-W5用节拍器替代下坡。设130-140次/分钟（双腿合计260-280），跟着节奏跑。每两周提高5次。</div><div class="dose">📋 4×20米 + 行进间飞跑3×30米（95%），飞跑间休4分钟。</div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-h"><span class="sec-num">4</span><h2>爆发力（20分钟）</h2></div>
+      <div class="card">
+        <div class="move">
+          <h4>立定跳远 <span class="tag-h">5次（取最好记录）</span></h4>
+          <div class="why">全身爆发力+下肢弹跳，也是选材指标。</div>
+          <div class="dose">📋 5次取最好成绩记录。预摆2-3次、全力起跳、收腿前伸、落地不后坐。</div>
+        </div>
+        <div class="move">
+          <h4>立定三级跳 <span class="tag-s">3组</span></h4>
+          <div class="dose">📋 3组，组间休2分钟。左-左-右或右-右左交替，追求连续发力节奏。</div>
+        </div>
+        <div class="move">
+          <h4>跨步跳(Bounding) <span class="tag-h">3×40米</span></h4>
+          <div class="why">大步幅蹬地+蹬摆协调，提高水平推进力。</div>
+          <div class="dose">📋 3×40米，组间走回休息。强调蹬地有力、摆腿充分。</div>
+        </div>
+        
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-h"><span class="sec-num">5</span><h2>基础力量（25分钟，徒手学动作）</h2></div>
+      <div class="card">
+        <table>
+          <thead><tr><th>动作</th><th>量</th><th>要点</th></tr></thead>
+          <tbody>
+          <tr><td>徒手深蹲</td><td>3×8</td><td>学动作模式，蹲到大腿平行</td></tr>
+          <tr><td>徒手RDL模式</td><td>3×8</td><td>学髋铰链，后背挺直</td></tr>
+          <tr><td>保加利亚分腿蹲</td><td>3×8/腿</td><td>徒手，后脚搭椅</td></tr>
+          <tr><td>提踵</td><td>3×15</td><td>双脚站，慢提慢放</td></tr></tbody>
+        </table>
+        <div class="dose" style="margin-top:12px"><b>铁律：</b>爆发/速度/反应类永远放在力量之前。力量时RPE 7-8（还能再做2-3次），不冲极限。14岁不做1RM。</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-h"><span class="sec-num">6</span><h2>放松拉伸（15分钟）</h2></div>
+      <div class="card">
+        <ol style="margin:0;padding-left:21px;font-size:14.5px">
+          <li>慢走3分钟，<b>立刻穿外套</b>。</li>
+          <li>全套静态拉伸各30秒×2：髂腰肌、股四头、腘绳肌、臀肌、小腿。</li>
+          <li>回家泡沫轴滚压各1分钟。</li>
+          <li>课后30分钟内补充：牛奶+香蕉/面包。</li>
+        </ol>
+      </div>
+    </section>
+
+  <!-- ============ 视频 ============ -->
+  <section>
+    <div class="sec-h"><span class="sec-num">▶</span><h2>视频指导（训练前在家看熟）</h2></div>
+    <p class="sec-sub">建议出发前先看一遍，心里有动作画面。训练场点开可直接播放。</p>
+    <div class="video-grid" id="videos"></div>
+  </section>
+
+  <!-- ============ 安全红线 ============ -->
+  <section>
+    <div class="sec-h"><span class="sec-num">⚠</span><h2>安全红线</h2></div>
+    <div class="note red"><b>出现这些立刻停</b>膝盖下方胫骨结节痛、足跟痛、髋前侧痛、下背痛；大腿后侧发紧或刺痛；头晕胸闷。告诉家长/教练，当天不再上强度。</div><div class="note warn"><b>周日大课纪律</b>反应训练放在体力最好时、不疲劳时练爆发。14岁不做1RM、不冲大重量。</div>
+  </section>
+
+  <!-- ============ 打卡 ============ -->
+  <section>
+    <div class="sec-h"><span class="sec-num">✓</span><h2>今日打卡（自动保存在本机）</h2></div>
+    <div class="card" id="checklist">
+      <label class="check"><input type="checkbox"><span class="ct">昨晚睡够9小时、早餐吃了</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">热身做满25分钟</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">神经反应训练≤15次、没有抢跑</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">节拍器高频跑+飞跑完成</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">立定跳远5次并记录最好成绩</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">立定三级跳3组</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">跨步跳3×40米</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">力量：深蹲+RDL+分腿蹲+提踵</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">基础力量完成（RPE 7-8，不冲极限）</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">课后全套拉伸+泡沫轴</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">课后30分钟内补充蛋白+碳水</span></label>
+      <label class="check"><input type="checkbox"><span class="ct">训练数据记录到日记</span></label>
+    </div>
+    <div class="progress-wrap"><span id="ptext">完成 0 / 12</span><span class="bar"><i id="pbar"></i></span></div>
+  </section>
+
+  <footer>
+    14岁男子冬季训练计划 v3（周末版）· 步频与神经反应专项 · 冬训 W3 Day 15 / 共13周<br>
+    <a href="../index.html" style="color:var(--muted)">← 返回训练日历</a><br>
+    本页用于理解训练逻辑与自主训练，不能替代带训教练当面指导 · 如有关节疼痛请停止并就医
+  </footer>
+</div>
+
+<script>
+(function(){
+  var videos = [
+    {"title":"起跑反应练习（反应时怎么练）","src":"Mvags训练频道 · B站","focus":"反应时训练的逻辑：少量、完全恢复、信号随机","aid":"112964350771754","url":"https://www.bilibili.com/video/av112964350771754/"},
+    {"title":"短跑最大速度训练课（完整热身与步频动作）","src":"升班马运动科学 · B站","focus":"完整演示 Pogo/Fast Leg/小栏架/A-Skip/B-Skip，重点盯 Pogo 和 Fast Leg 的脚法、触地速度","bv":"BV1sCXsByE7e","url":"https://www.bilibili.com/video/BV1sCXsByE7e/"},
+    {"title":"立定跳远技术教学","src":"刘致玮耶 · B站","focus":"预摆→下蹲→起跳→腾空→收腿→落地六步分解，摆臂要狠、脚趾发力","bv":"BV1qt421G7rJ","url":"https://www.bilibili.com/video/BV1qt421G7rJ/"},
+    {"title":"深蹲干货分享：学习如何正确深蹲","src":"大强的训练哲学 · B站","focus":"不负重先学底部姿势，臀部驱动直线上升，全脚掌支撑","bv":"BV1cdDVY6ExQ","url":"https://www.bilibili.com/video/BV1cdDVY6ExQ/"}
+  ];
+
+  function playerSrc(v){
+    if(v.bv) return "https://player.bilibili.com/player.html?bvid="+v.bv+"&high_quality=1&danmaku=0";
+    return "https://player.bilibili.com/player.html?aid="+v.aid+"&high_quality=1&danmaku=0";
+  }
+
+  var box = document.getElementById('videos');
+  videos.forEach(function(v,i){
+    var d=document.createElement('div'); d.className='video';
+    d.innerHTML =
+      '<div class="v-head"><div class="v-title">'+(i+1)+'. '+v.title+'</div>'+
+      '<div class="v-src">'+v.src+'</div></div>'+
+      '<div class="v-focus">'+v.focus+'</div>'+
+      '<a class="v-frame" href="'+v.url+'" target="_blank" rel="noopener" data-i="'+i+'">'+
+        '<span class="play"><span class="tri"></span><span class="pl-txt">点击播放教学视频</span></span>'+
+      '</a>'+
+      '<div class="vfoot" style="padding:0 16px 14px;font-size:12.5px">打不开？<a href="'+v.url+'" target="_blank" rel="noopener">在 B 站打开 ↗</a></div>';
+    box.appendChild(d);
+  });
+
+  document.querySelectorAll('.v-frame').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var i=+a.getAttribute('data-i');
+      var f=document.createElement('iframe');
+      f.src=playerSrc(videos[i])+"&autoplay=1";
+      f.setAttribute("allowfullscreen","");
+      f.setAttribute("allow","autoplay; fullscreen; picture-in-picture");
+      a.textContent='';
+      a.appendChild(f);
+      a.style.cursor='default';
+    });
+  });
+
+  var KEY='winter_20261108_checks';
+  var boxes=[].slice.call(document.querySelectorAll('#checklist input'));
+  function load(){
+    try{var s=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){s=[];}
+    boxes.forEach(function(b,i){b.checked=!!s[i];});
+    update();
+  }
+  function save(){
+    var s=boxes.map(function(b){return b.checked;});
+    try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}
+  }
+  function update(){
+    var n=boxes.filter(function(b){return b.checked;}).length;
+    document.getElementById('ptext').textContent='完成 '+n+' / '+boxes.length;
+    document.getElementById('pbar').style.width=(n/boxes.length*100)+'%';
+  }
+  boxes.forEach(function(b){b.addEventListener('change',function(){save();update();});});
+  load();
+})();
+</script>
+</body>
+</html>

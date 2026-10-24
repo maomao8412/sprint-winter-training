@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>冬训日历 · 14岁男子步频与神经反应专项</title>
 <style>
-  :root{--ink:#101828;--ink2:#344054;--muted:#667085;--bg:#f4f6fb;--card:#fff;--track:#e8462b;--track-d:#c2321b;--navy:#14233f;--navy2:#1d3561;--ice:#eef4ff;--line:#e4e9f2;--radius:18px;--shadow:0 1px 2px rgba(16,24,40,.05),0 12px 32px -16px rgba(20,35,63,.18)}
+  :root{--ink:#101828;--ink2:#344054;--muted:#667085;--bg:#f4f6fb;--card:#fff;--track:#e8462b;--track-d:#c2321b;--navy:#14233f;--navy2:#1d3561;--ice:#eef4ff;--line:#e4e9f2;--radius:18px;--shadow:0 1px 2px rgba(16,24,40,.05),0 12px 32px -16px rgba(20,35,63,.18);--ok:#039855;--warn:#b54708}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.75;font-size:16px}
   a{color:var(--track-d)}
@@ -16,14 +16,36 @@
   .info-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:-36px auto 24px;position:relative;z-index:2}
   .info-card h2{margin:0 0 8px;font-size:17px;color:var(--navy)}
   .info-card p{margin:0;color:var(--ink2);font-size:14.5px}
-  table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-  th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
-  th{background:var(--ice);color:var(--navy);font-size:13px;font-weight:800}
-  td a{font-weight:700;text-decoration:none}
-  td a:hover{text-decoration:underline}
   .chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
   .chip{background:var(--ice);color:var(--navy2);font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 0}
+  .stat{background:var(--ice);border-radius:12px;padding:12px;text-align:center}
+  .stat .num{font-size:22px;font-weight:800;color:var(--navy)}
+  .stat .lbl{font-size:11px;color:var(--muted);font-weight:600}
+  .week-block{margin-bottom:18px}
+  .week-header{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--navy);color:#fff;border-radius:14px 14px 0 0;font-size:14px;flex-wrap:wrap}
+  .week-label{background:var(--track);color:#fff;font-weight:800;font-size:13px;padding:4px 12px;border-radius:8px;letter-spacing:.05em}
+  .week-phase{font-weight:600;color:#dbe6fa;font-size:13px}
+  .test-badge{background:#fff3;font-size:11px;padding:3px 10px;border-radius:6px;font-weight:700}
+  .test-week .week-header{background:linear-gradient(135deg,var(--navy) 0%,#3a1d61 100%)}
+  .test-week .week-label{background:var(--warn)}
+  .week-block table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border-radius:0 0 14px 14px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:0}
+  .week-block table tr:last-child td{border-bottom:none}
+  .week-block td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+  .day-num{font-weight:800;color:var(--muted);font-size:12px;width:40px}
+  .type-cell{font-weight:700;white-space:nowrap}
+  .desc-cell{color:var(--muted);font-size:12.5px}
+  td a{font-weight:700;text-decoration:none}
+  td a:hover{text-decoration:underline}
+  .day-sunday{background:#fff8f6}
+  .day-saturday{background:#f8faff}
+  .day-rest{background:#f9fafb;color:var(--muted)}
   footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+  @media(max-width:680px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .desc-cell{display:none}
+    .week-header{font-size:12px}
+  }
 </style>
 </head>
 <body>
@@ -34,25 +56,207 @@
 <div class="wrap">
   <div class="info-card">
     <h2>📋 训练计划概览</h2>
-    <p>13周冬季训练，主题：<b>步频（神经驱动速度）＋ 神经反应速度</b>。周一至周五上课日做20分钟微训练，周六步频技术课（90分钟），周日重点大课（110分钟）。点击日期查看当天详细训练指导。</p>
+    <p>13周冬季训练，主题：<b>步频（神经驱动速度）＋ 神经反应速度</b>。周一至周五上课日做15-20分钟微训练，周六步频技术课（90分钟），周日重点大课（110分钟）。点击日期查看当天详细训练指导。</p>
     <div class="chips">
-      <span class="chip">W1-W4 神经唤醒</span>
-      <span class="chip">W5-W8 步频转化</span>
-      <span class="chip">W9-W13 专项提速</span>
-      <span class="chip">W4/W8/W13 测试周</span>
+      <span class="chip">W1-W4 神经唤醒期</span>
+      <span class="chip">W5-W8 步频转化期</span>
+      <span class="chip">W9-W13 专项提速期</span>
+      <span class="chip">📋 W4/W8/W13 测试周</span>
+      <span class="chip">🏔 W6起 下坡超速</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">92</div><div class="lbl">已生成页面</div></div>
+      <div class="stat"><div class="num">13</div><div class="lbl">训练周数</div></div>
+      <div class="stat"><div class="num">92</div><div class="lbl">总训练天数</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">测试次数</div></div>
     </div>
   </div>
 
-  <table>
-    <thead><tr><th>日期</th><th>星期</th><th>周次</th><th>训练内容</th></tr></thead>
-    <tbody>
-        <tr><td><a href="pages/2026-10-25.html">2026年10月25日</a></td><td>周日</td><td>W1</td><td>🔥 重点大课</td></tr>
-        <tr><td><a href="pages/2026-10-26.html">2026年10月26日</a></td><td>周一</td><td>W1</td><td>🏃 微训练A</td></tr>
-    </tbody>
-  </table>
+  
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W1</span>
+            <span class="week-phase">神经唤醒期 · 10/25–10/31</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D1</td><td><a href="pages/2026-10-25.html">10月25日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D2</td><td><a href="pages/2026-10-26.html">10月26日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D3</td><td><a href="pages/2026-10-27.html">10月27日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D4</td><td><a href="pages/2026-10-28.html">10月28日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D5</td><td><a href="pages/2026-10-29.html">10月29日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D6</td><td><a href="pages/2026-10-30.html">10月30日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D7</td><td><a href="pages/2026-10-31.html">10月31日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W2</span>
+            <span class="week-phase">神经唤醒期 · 11/1–11/7</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D8</td><td><a href="pages/2026-11-01.html">11月1日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D9</td><td><a href="pages/2026-11-02.html">11月2日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D10</td><td><a href="pages/2026-11-03.html">11月3日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D11</td><td><a href="pages/2026-11-04.html">11月4日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D12</td><td><a href="pages/2026-11-05.html">11月5日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D13</td><td><a href="pages/2026-11-06.html">11月6日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D14</td><td><a href="pages/2026-11-07.html">11月7日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W3</span>
+            <span class="week-phase">神经唤醒期 · 11/8–11/14</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D15</td><td><a href="pages/2026-11-08.html">11月8日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D16</td><td><a href="pages/2026-11-09.html">11月9日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D17</td><td><a href="pages/2026-11-10.html">11月10日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D18</td><td><a href="pages/2026-11-11.html">11月11日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D19</td><td><a href="pages/2026-11-12.html">11月12日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D20</td><td><a href="pages/2026-11-13.html">11月13日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D21</td><td><a href="pages/2026-11-14.html">11月14日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block test-week">
+          <div class="week-header">
+            <span class="week-label">W4</span>
+            <span class="week-phase">神经唤醒期 · 11/15–11/21</span>
+             <span class="test-badge">📋 测试周</span>
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D22</td><td><a href="pages/2026-11-15.html">11月15日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D23</td><td><a href="pages/2026-11-16.html">11月16日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D24</td><td><a href="pages/2026-11-17.html">11月17日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D25</td><td><a href="pages/2026-11-18.html">11月18日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D26</td><td><a href="pages/2026-11-19.html">11月19日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D27</td><td><a href="pages/2026-11-20.html">11月20日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D28</td><td><a href="pages/2026-11-21.html">11月21日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W5</span>
+            <span class="week-phase">步频转化期 · 11/22–11/28</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D29</td><td><a href="pages/2026-11-22.html">11月22日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D30</td><td><a href="pages/2026-11-23.html">11月23日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D31</td><td><a href="pages/2026-11-24.html">11月24日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D32</td><td><a href="pages/2026-11-25.html">11月25日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D33</td><td><a href="pages/2026-11-26.html">11月26日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D34</td><td><a href="pages/2026-11-27.html">11月27日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D35</td><td><a href="pages/2026-11-28.html">11月28日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W6</span>
+            <span class="week-phase">步频转化期 · 11/29–12/5</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D36</td><td><a href="pages/2026-11-29.html">11月29日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D37</td><td><a href="pages/2026-11-30.html">11月30日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D38</td><td><a href="pages/2026-12-01.html">12月1日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D39</td><td><a href="pages/2026-12-02.html">12月2日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D40</td><td><a href="pages/2026-12-03.html">12月3日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D41</td><td><a href="pages/2026-12-04.html">12月4日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D42</td><td><a href="pages/2026-12-05.html">12月5日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W7</span>
+            <span class="week-phase">步频转化期 · 12/6–12/12</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D43</td><td><a href="pages/2026-12-06.html">12月6日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D44</td><td><a href="pages/2026-12-07.html">12月7日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D45</td><td><a href="pages/2026-12-08.html">12月8日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D46</td><td><a href="pages/2026-12-09.html">12月9日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D47</td><td><a href="pages/2026-12-10.html">12月10日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D48</td><td><a href="pages/2026-12-11.html">12月11日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D49</td><td><a href="pages/2026-12-12.html">12月12日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block test-week">
+          <div class="week-header">
+            <span class="week-label">W8</span>
+            <span class="week-phase">步频转化期 · 12/13–12/19</span>
+             <span class="test-badge">📋 测试周</span>
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D50</td><td><a href="pages/2026-12-13.html">12月13日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D51</td><td><a href="pages/2026-12-14.html">12月14日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D52</td><td><a href="pages/2026-12-15.html">12月15日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D53</td><td><a href="pages/2026-12-16.html">12月16日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D54</td><td><a href="pages/2026-12-17.html">12月17日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D55</td><td><a href="pages/2026-12-18.html">12月18日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D56</td><td><a href="pages/2026-12-19.html">12月19日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W9</span>
+            <span class="week-phase">专项提速期 · 12/20–12/26</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D57</td><td><a href="pages/2026-12-20.html">12月20日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D58</td><td><a href="pages/2026-12-21.html">12月21日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D59</td><td><a href="pages/2026-12-22.html">12月22日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D60</td><td><a href="pages/2026-12-23.html">12月23日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D61</td><td><a href="pages/2026-12-24.html">12月24日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D62</td><td><a href="pages/2026-12-25.html">12月25日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D63</td><td><a href="pages/2026-12-26.html">12月26日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W10</span>
+            <span class="week-phase">专项提速期 · 12/27–1/2</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D64</td><td><a href="pages/2026-12-27.html">12月27日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D65</td><td><a href="pages/2026-12-28.html">12月28日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D66</td><td><a href="pages/2026-12-29.html">12月29日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D67</td><td><a href="pages/2026-12-30.html">12月30日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D68</td><td><a href="pages/2026-12-31.html">12月31日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D69</td><td><a href="pages/2027-01-01.html">1月1日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D70</td><td><a href="pages/2027-01-02.html">1月2日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W11</span>
+            <span class="week-phase">专项提速期 · 1/3–1/9</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D71</td><td><a href="pages/2027-01-03.html">1月3日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D72</td><td><a href="pages/2027-01-04.html">1月4日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D73</td><td><a href="pages/2027-01-05.html">1月5日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D74</td><td><a href="pages/2027-01-06.html">1月6日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D75</td><td><a href="pages/2027-01-07.html">1月7日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D76</td><td><a href="pages/2027-01-08.html">1月8日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D77</td><td><a href="pages/2027-01-09.html">1月9日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W12</span>
+            <span class="week-phase">专项提速期 · 1/10–1/16</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D78</td><td><a href="pages/2027-01-10.html">1月10日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D79</td><td><a href="pages/2027-01-11.html">1月11日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D80</td><td><a href="pages/2027-01-12.html">1月12日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D81</td><td><a href="pages/2027-01-13.html">1月13日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D82</td><td><a href="pages/2027-01-14.html">1月14日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D83</td><td><a href="pages/2027-01-15.html">1月15日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D84</td><td><a href="pages/2027-01-16.html">1月16日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block test-week">
+          <div class="week-header">
+            <span class="week-label">W13</span>
+            <span class="week-phase">专项提速期 · 1/17–1/23</span>
+             <span class="test-badge">📋 测试周</span>
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D85</td><td><a href="pages/2027-01-17.html">1月17日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr><tr class="day-micro_A"><td class="day-num">D86</td><td><a href="pages/2027-01-18.html">1月18日</a></td><td>周一</td><td class="type-cell">🏃 微训练A</td><td class="desc-cell">快速脚步+核心</td></tr><tr class="day-micro_B"><td class="day-num">D87</td><td><a href="pages/2027-01-19.html">1月19日</a></td><td>周二</td><td class="type-cell">💪 微训练B</td><td class="desc-cell">摆臂+踝刚性</td></tr><tr class="day-micro_C"><td class="day-num">D88</td><td><a href="pages/2027-01-20.html">1月20日</a></td><td>周三</td><td class="type-cell">🦵 微训练C</td><td class="desc-cell">髋灵活+送髋</td></tr><tr class="day-micro_D"><td class="day-num">D89</td><td><a href="pages/2027-01-21.html">1月21日</a></td><td>周四</td><td class="type-cell">🎯 微训练D</td><td class="desc-cell">反应+拉伸</td></tr><tr class="day-rest"><td class="day-num">D90</td><td><a href="pages/2027-01-22.html">1月22日</a></td><td>周五</td><td class="type-cell">🌙 休息日</td><td class="desc-cell">恢复蓄力</td></tr><tr class="day-saturday"><td class="day-num">D91</td><td><a href="pages/2027-01-23.html">1月23日</a></td><td>周六</td><td class="type-cell">⚡ 步频技术课</td><td class="desc-cell">步频技术课</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="week-block">
+          <div class="week-header">
+            <span class="week-label">W14</span>
+            <span class="week-phase">专项提速期 · 1/24–1/24</span>
+            
+          </div>
+          <table>
+            <tbody>
+              <tr class="day-sunday"><td class="day-num">D92</td><td><a href="pages/2027-01-24.html">1月24日</a></td><td>周日</td><td class="type-cell">🔥 重点大课</td><td class="desc-cell">重点大课</td></tr>
+            </tbody>
+          </table>
+        </div>
 </div>
 <footer>
-  14岁男子冬季训练计划 v3（周末版）· 步频与神经反应专项 · 共13周<br>
+  14岁男子冬季训练计划 v3（周末版）· 步频与神经反应专项 · 共13周 · 92/92天已生成<br>
   本页用于理解训练逻辑与自主训练，不能替代带训教练当面指导
 </footer>
 </body>
